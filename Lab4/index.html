@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <title>Leaflet Map displaying ISS Location</title>
+    </head>
+    <body>
+        <h3 id="text">Click the button to get ISS location.</h3>
+        <div id="latitude">Latitude: </div>
+        <div id="longitude" style="margin-top: 6px;">Longitude: </div>
+
+        <button onclick="getISSCoordinated()" style="margin-top: 10px; margin-bottom: 12px;">Click here</button>
+
+        <div id="map" style="height: 450px;"></div>
+
+        <!-- Group Information --->
+        <h4>Group Information according to Blackboard: </h4>
+        <p class="groupInfo"><b>Group No: </b> 5</p>
+        <p class="groupInfo"><b>Group Name: </b> New Group 5</p>
+        <p class="groupInfo"><b>Group Members: </b></p>
+        <p class="groupInfo">1. Puja Shrestha, 200573293</p>
+        <p class="groupInfo">2. Suyog Shrestha, 200565523</p>
+
+        <script>
+            let map;
+            const issURL = "https://api.wheretheiss.at/v1/satellites/25544";
+            const issText = document.getElementById("text");
+            const latitudeText = document.getElementById("latitude");
+            const longitudeText = document.getElementById("longitude");
+            
+            function getISSCoordinated() {            
+                // fetching the ISS coordinates
+                fetch(issURL)
+                    .then(response => response.json())
+                    .then(data => {
+                        // setting the coordinates and zoom value in the map
+                        if (!map) {
+                            map = L.map('map').setView([data.latitude, data.longitude], 4);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            }).addTo(map);
+                        }
+            
+                        // adding marker to the map
+                        L.marker([data.latitude, data.longitude])
+                            .addTo(map)
+                            .bindPopup('International Space Station (ISS)');
+            
+                        // setting latitude and longitude in map
+                        issText.innerHTML = "ISS coordinates: ";
+                        latitudeText.innerHTML = `Latitude: ${data.latitude}`;
+                        longitudeText.innerHTML = `Longitude: ${data.longitude}`;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        </script>
+    </body>
+</html>
