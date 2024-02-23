@@ -61,13 +61,16 @@ exports.loginUser = (req, res, next) => {
 exports.logoutUser = (req, res, next) => {
     // Use req.logout with a callback function
     req.logout((err) => {
-        if (err) {
-            console.log(err);
-            req.flash('error', 'Internal Server Error');
-            return res.redirect('/login');
-        }
-    }
-    )};
+        // Handle error by passing it to next middleware
+        if (err) { return next(err); }
+
+        // Render 'login' page with logout success message
+        res.render(
+            "login", 
+            { message: "User is successfully logout." } // Passing logout message as 'message' parameter
+        );
+    });
+};
 
     
      
