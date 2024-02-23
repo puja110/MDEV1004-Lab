@@ -24,6 +24,12 @@
         <button type="submit">Login</button>
     </form>
     
-    
+    </br>
+
+    <% if (message && message.length > 0) { %>
+        <div>
+            <%= message %>
+        </div>
+    <% } %>
 </body>
 </html>

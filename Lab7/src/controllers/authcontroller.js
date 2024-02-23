@@ -56,23 +56,23 @@ exports.loginUser = (req, res, next) => {
     })(req, res, next);
 };
 
-
-// Log out a user
 exports.logoutUser = (req, res, next) => {
-    // Use req.logout with a callback function
     req.logout((err) => {
         // Handle error by passing it to next middleware
         if (err) { return next(err); }
 
-        // Render 'login' page with logout success message
+        /* 
+            Render the 'login' page with logout success message.
+            I decided to use the render method instead of the redirect method to navigate 
+            to the login page. This choice allows me to pass a 'message' parameter, 
+            enabling the display of the logout success message.
+        */
         res.render(
             "login", 
-            { message: "User is successfully logout." } // Passing logout message as 'message' parameter
+            { message: "User is successfully logout." }
         );
     });
 };
-
-    
      
     exports.protectedRoute = (req, res) => {
         console.log('Inside protectedRoute');
