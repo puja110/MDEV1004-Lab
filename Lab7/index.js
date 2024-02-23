@@ -89,7 +89,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('login');
+    /* 
+        Render the login page and pass an empty string as the 'message' parameter
+        This prevents potential errors when displaying a logout message before the logout event occurs.
+    */
+    res.render('login', { message: "" });
 });
 
 app.get('/register', (req, res) => {
