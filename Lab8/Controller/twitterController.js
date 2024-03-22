@@ -8,18 +8,13 @@ class TwitterController {
 
   async createTweet(text) {
     try {
-      // await this.twitterModel.tweet(text);
-      // return "Tweet created successfully";
       await this.twitterModel.tweet(text);
         return `
           <div>
             <h1>Lab-8</h1>
-            <br/>
-            <p>Puja Shrestha - 200573293</p>
-            <br/>
-            <h3>Tweet message</h3>
-            <br/>
-            <p>${text}</p>
+            <h2>Puja Shrestha - 200573293</h2>
+            <h3>Tweet: </h3>
+            <p>"${text}"</p>
           </div>
         `;
     } catch (error) {

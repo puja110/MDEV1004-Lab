@@ -4,11 +4,11 @@ const { TwitterApi } = require("twitter-api-v2");
 class TwitterModel {
   constructor() {
     this.client = new TwitterApi({
-      appKey: "2MSF1qDeenS0tPwPjfV1TBKev",
-      appSecret: "605dHRb7fVZMZEjUUHxuagSdZpzgEY30uESI8FJbimrHpvyVMy",
-      accessToken: "1770583256720949248-KRO4XflvTSE838K9Rw5mEAMmiwMaiS",
-      accessSecret: "3T1zDF1eBMEuraoYoBBYiQoVPPhdo4I0O2rndXz68jfbq",
-      bearerToken: "AAAAAAAAAAAAAAAAAAAAAFquswEAAAAAEBhjsHqsnjk1LAnL1mXcrzjWLs8%3DUIuNKcvxWtKa4roCSaEa9BxkpZQgCxen3gR5M4UshTeySGbRu1",
+      appKey: "tkhavByUSPK6s5IbT3ik2lqI6",
+      appSecret: "l4GQ3qsbFQof0FI668lywN5YsZuGLMaZLvRJ8Re5FlN0NGnB7p",
+      accessToken: "1771014325320200192-K15ItC5oJ4PkEWeOtruMgmoRgOgHiT",
+      accessSecret: "wIJSxYn1fkw5cxIdrm2RkvMiWnqkKBmRoaV4GoOBhxK7v",
+      bearerToken: "AAAAAAAAAAAAAAAAAAAAANq%2FswEAAAAAZ5mS7x7StdkYMT0gPxIGcQ57qlY%3D7Tx02Qh0tr1ki5i93A5DfTCk4ayv5gB4IWi8llej4EFm6I5EgQ",
     });
 
     this.rwClient = this.client.readWrite;

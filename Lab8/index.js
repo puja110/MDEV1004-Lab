@@ -7,48 +7,24 @@ const PORT = 3000;
 
 const twitterController = new TwitterController();
 
-// // List of random words
-// const tweetWords = ["amazing", "awesome", "fantastic", "Great", "Nice", "Good", "Incredible", "wonderful", "fabulous"];
-
-// // Function to generate a random word
-// function getRandomWord() {
-//   return tweetWords[Math.floor(Math.random() * tweetWords.length)];
-// }
-
-// // Function to replace placeholders with random words
-// function generateUniqueTweet() {
-//   const adjective = getRandomWord();
-
-//   // Replace placeholders with random words
-//   const tweet = tweetTemplate.replace("{adjective}", adjective).replace("{feeling}", feeling);
-
-//   // Output the tweet
-//   console.log(tweet);
-// }
-
-// generateRandomTweet()
-
 // Handle the route for creating a tweet
 app.get("/tweet", async (req, res) => {
-  const tweetWordArray = ["amazing", "awesome", "fantastic", "Great", "Nice", "Good", "Incredible", "wonderful", "fabulous"];
+  // Array of words to use in the tweet
+  const tweetWordArray = [
+    "amazing", "awesome", "Excellent", "fantastic", "Great", "Nice", "Good", "Terrific", 
+    "Incredible", "Outstanding", "wonderful", "Delightful", "fabulous", "Superb", "Splendid"];
+  
+  // Select a random word from the tweetWordArray
+  const tweetWord = tweetWordArray[Math.floor(Math.random() * tweetWordArray.length)]
 
+  // Get the current time in milliseconds
+  const time = new Date().getTime()
+
+  // Creating the tweet message with random tweet word and unique string time
+  const tweetMessage = `It was ${tweetWord} event! The next event will be held at ${time} (time in string)!`;
   try {
-    // Getting random tweet word from the tweet array
-    const tweetWord = tweetWordArray[Math.floor(Math.random() * tweetWordArray.length)]
-
-    // Getting current date and time to generate unique time format
-    const date = new Date().getTime();
-
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-
-    const eventTime = `Current time: ${hours}:${minutes}:${seconds}`
-
-    // Tweet template with placeholders
-    const tweetMessage = `It was ${eventTime} event! The next event will be held at!`;
-    console.log("tweetMessage: ", eventTime)
-    res.send(tweetMessage);
+    const tweetResult = await twitterController.createTweet(tweetMessage);
+    res.send(tweetResult);
   } catch (error) {
     res.status(500).send("Error creating tweet");
   }
